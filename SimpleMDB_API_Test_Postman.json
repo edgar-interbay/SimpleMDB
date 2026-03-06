@@ -1,0 +1,475 @@
+{
+  "info": {
+    "name": "SimpleMDB API Tests",
+    "description": "Complete API test collection for SimpleMDB",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Movies",
+      "item": [
+        {
+          "name": "List Movies (Success)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/api/v1/movies?page=1&size=5",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["api", "v1", "movies"],
+              "query": [
+                {"key": "page", "value": "1"},
+                {"key": "size", "value": "5"}
+              ]
+            }
+          }
+        },
+        {
+          "name": "List Movies (Error - Invalid page)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/api/v1/movies?page=0&size=5",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["api", "v1", "movies"],
+              "query": [
+                {"key": "page", "value": "0"},
+                {"key": "size", "value": "5"}
+              ]
+            }
+          }
+        },
+        {
+          "name": "Create Movie (Success)",
+          "request": {
+            "method": "POST",
+            "header": [{"key": "Content-Type", "value": "application/json"}],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"title\":\"Inception\",\"year\":2010,\"description\":\"A thief who steals corporate secrets through dream-sharing technology.\"}"
+            },
+            "url": {
+              "raw": "http://localhost:3000/api/v1/movies",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["api", "v1", "movies"]
+            }
+          }
+        },
+        {
+          "name": "Create Movie (Error - Missing title)",
+          "request": {
+            "method": "POST",
+            "header": [{"key": "Content-Type", "value": "application/json"}],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"title\":\"\",\"year\":2010,\"description\":\"Test\"}"
+            },
+            "url": {
+              "raw": "http://localhost:3000/api/v1/movies",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["api", "v1", "movies"]
+            }
+          }
+        },
+        {
+          "name": "Read Movie (Success)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/api/v1/movies/1",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["api", "v1", "movies", "1"]
+            }
+          }
+        },
+        {
+          "name": "Read Movie (Error - Not found)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/api/v1/movies/999",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["api", "v1", "movies", "999"]
+            }
+          }
+        },
+        {
+          "name": "Update Movie (Success)",
+          "request": {
+            "method": "PUT",
+            "header": [{"key": "Content-Type", "value": "application/json"}],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"title\":\"The Shawshank Redemption - Updated\",\"year\":1994,\"description\":\"Updated description.\"}"
+            },
+            "url": {
+              "raw": "http://localhost:3000/api/v1/movies/1",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["api", "v1", "movies", "1"]
+            }
+          }
+        },
+        {
+          "name": "Update Movie (Error - Invalid year)",
+          "request": {
+            "method": "PUT",
+            "header": [{"key": "Content-Type", "value": "application/json"}],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"title\":\"Test\",\"year\":1500,\"description\":\"Test\"}"
+            },
+            "url": {
+              "raw": "http://localhost:3000/api/v1/movies/1",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["api", "v1", "movies", "1"]
+            }
+          }
+        },
+        {
+          "name": "Delete Movie (Success)",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/api/v1/movies/3",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["api", "v1", "movies", "3"]
+            }
+          }
+        },
+        {
+          "name": "Delete Movie (Error - Not found)",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/api/v1/movies/999",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["api", "v1", "movies", "999"]
+            }
+          }
+        },
+        {
+          "name": "Get Actors by Movie (Success)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/api/v1/movies/1/actors?page=1&size=5",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["api", "v1", "movies", "1", "actors"],
+              "query": [
+                {"key": "page", "value": "1"},
+                {"key": "size", "value": "5"}
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Actors",
+      "item": [
+        {
+          "name": "List Actors (Success)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/api/v1/actors?page=1&size=5",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["api", "v1", "actors"],
+              "query": [
+                {"key": "page", "value": "1"},
+                {"key": "size", "value": "5"}
+              ]
+            }
+          }
+        },
+        {
+          "name": "Create Actor (Success)",
+          "request": {
+            "method": "POST",
+            "header": [{"key": "Content-Type", "value": "application/json"}],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"name\":\"Leonardo DiCaprio\",\"birthYear\":1974,\"nationality\":\"American\"}"
+            },
+            "url": {
+              "raw": "http://localhost:3000/api/v1/actors",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["api", "v1", "actors"]
+            }
+          }
+        },
+        {
+          "name": "Read Actor (Success)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/api/v1/actors/1",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["api", "v1", "actors", "1"]
+            }
+          }
+        },
+        {
+          "name": "Update Actor (Success)",
+          "request": {
+            "method": "PUT",
+            "header": [{"key": "Content-Type", "value": "application/json"}],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"name\":\"Morgan Freeman - Updated\",\"birthYear\":1937,\"nationality\":\"American\"}"
+            },
+            "url": {
+              "raw": "http://localhost:3000/api/v1/actors/1",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["api", "v1", "actors", "1"]
+            }
+          }
+        },
+        {
+          "name": "Delete Actor (Success)",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/api/v1/actors/3",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["api", "v1", "actors", "3"]
+            }
+          }
+        },
+        {
+          "name": "Get Movies by Actor (Success)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/api/v1/actors/1/movies?page=1&size=5",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["api", "v1", "actors", "1", "movies"],
+              "query": [
+                {"key": "page", "value": "1"},
+                {"key": "size", "value": "5"}
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Users",
+      "item": [
+        {
+          "name": "List Users (Success)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/api/v1/users?page=1&size=5",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["api", "v1", "users"],
+              "query": [
+                {"key": "page", "value": "1"},
+                {"key": "size", "value": "5"}
+              ]
+            }
+          }
+        },
+        {
+          "name": "Create User (Success)",
+          "request": {
+            "method": "POST",
+            "header": [{"key": "Content-Type", "value": "application/json"}],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"username\":\"newuser\",\"email\":\"newuser@smdb.com\",\"role\":\"User\"}"
+            },
+            "url": {
+              "raw": "http://localhost:3000/api/v1/users",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["api", "v1", "users"]
+            }
+          }
+        },
+        {
+          "name": "Read User (Success)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/api/v1/users/1",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["api", "v1", "users", "1"]
+            }
+          }
+        },
+        {
+          "name": "Update User (Success)",
+          "request": {
+            "method": "PUT",
+            "header": [{"key": "Content-Type", "value": "application/json"}],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"username\":\"admin-updated\",\"email\":\"admin@smdb.com\",\"role\":\"Admin\"}"
+            },
+            "url": {
+              "raw": "http://localhost:3000/api/v1/users/1",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["api", "v1", "users", "1"]
+            }
+          }
+        },
+        {
+          "name": "Delete User (Success)",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/api/v1/users/2",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["api", "v1", "users", "2"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Actors-Movies",
+      "item": [
+        {
+          "name": "List Actors-Movies (Success)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/api/v1/actors-movies?page=1&size=5",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["api", "v1", "actors-movies"],
+              "query": [
+                {"key": "page", "value": "1"},
+                {"key": "size", "value": "5"}
+              ]
+            }
+          }
+        },
+        {
+          "name": "Create Actor-Movie (Success)",
+          "request": {
+            "method": "POST",
+            "header": [{"key": "Content-Type", "value": "application/json"}],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"actorId\":1,\"movieId\":2,\"role\":\"Supporting Actor\"}"
+            },
+            "url": {
+              "raw": "http://localhost:3000/api/v1/actors-movies",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["api", "v1", "actors-movies"]
+            }
+          }
+        },
+        {
+          "name": "Read Actor-Movie (Success)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/api/v1/actors-movies/1",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["api", "v1", "actors-movies", "1"]
+            }
+          }
+        },
+        {
+          "name": "Update Actor-Movie (Success)",
+          "request": {
+            "method": "PUT",
+            "header": [{"key": "Content-Type", "value": "application/json"}],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"actorId\":1,\"movieId\":1,\"role\":\"Updated Role\"}"
+            },
+            "url": {
+              "raw": "http://localhost:3000/api/v1/actors-movies/1",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["api", "v1", "actors-movies", "1"]
+            }
+          }
+        },
+        {
+          "name": "Delete Actor-Movie (Success)",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/api/v1/actors-movies/3",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["api", "v1", "actors-movies", "3"]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

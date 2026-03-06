@@ -1,0 +1,254 @@
+### SimpleMDB API Test - REST Client
+### Use the REST Client extension in VS Code to run these requests
+
+### ========== MOVIES ENDPOINTS ==========
+
+### List Movies (Success)
+GET http://localhost:3000/api/v1/movies?page=1&size=5
+
+### List Movies (Error - Invalid page)
+GET http://localhost:3000/api/v1/movies?page=0&size=5
+
+### Create Movie (Success)
+POST http://localhost:3000/api/v1/movies
+Content-Type: application/json
+
+{
+  "title": "Inception",
+  "year": 2010,
+  "description": "A thief who steals corporate secrets through dream-sharing technology."
+}
+
+### Create Movie (Error - Missing title)
+POST http://localhost:3000/api/v1/movies
+Content-Type: application/json
+
+{
+  "title": "",
+  "year": 2010,
+  "description": "Test"
+}
+
+### Read Movie (Success)
+GET http://localhost:3000/api/v1/movies/1
+
+### Read Movie (Error - Not found)
+GET http://localhost:3000/api/v1/movies/999
+
+### Update Movie (Success)
+PUT http://localhost:3000/api/v1/movies/1
+Content-Type: application/json
+
+{
+  "title": "The Shawshank Redemption - Updated",
+  "year": 1994,
+  "description": "Updated description."
+}
+
+### Update Movie (Error - Invalid year)
+PUT http://localhost:3000/api/v1/movies/1
+Content-Type: application/json
+
+{
+  "title": "Test",
+  "year": 1500,
+  "description": "Test"
+}
+
+### Delete Movie (Success)
+DELETE http://localhost:3000/api/v1/movies/3
+
+### Delete Movie (Error - Not found)
+DELETE http://localhost:3000/api/v1/movies/999
+
+### Get Actors by Movie (Success)
+GET http://localhost:3000/api/v1/movies/1/actors?page=1&size=5
+
+### Get Actors by Movie (Error - Invalid page)
+GET http://localhost:3000/api/v1/movies/1/actors?page=0&size=5
+
+### ========== ACTORS ENDPOINTS ==========
+
+### List Actors (Success)
+GET http://localhost:3000/api/v1/actors?page=1&size=5
+
+### List Actors (Error - Invalid size)
+GET http://localhost:3000/api/v1/actors?page=1&size=0
+
+### Create Actor (Success)
+POST http://localhost:3000/api/v1/actors
+Content-Type: application/json
+
+{
+  "name": "Leonardo DiCaprio",
+  "birthYear": 1974,
+  "nationality": "American"
+}
+
+### Create Actor (Error - Missing name)
+POST http://localhost:3000/api/v1/actors
+Content-Type: application/json
+
+{
+  "name": "",
+  "birthYear": 1974,
+  "nationality": "American"
+}
+
+### Read Actor (Success)
+GET http://localhost:3000/api/v1/actors/1
+
+### Read Actor (Error - Not found)
+GET http://localhost:3000/api/v1/actors/999
+
+### Update Actor (Success)
+PUT http://localhost:3000/api/v1/actors/1
+Content-Type: application/json
+
+{
+  "name": "Morgan Freeman - Updated",
+  "birthYear": 1937,
+  "nationality": "American"
+}
+
+### Update Actor (Error - Invalid birth year)
+PUT http://localhost:3000/api/v1/actors/1
+Content-Type: application/json
+
+{
+  "name": "Test",
+  "birthYear": 1500,
+  "nationality": "Test"
+}
+
+### Delete Actor (Success)
+DELETE http://localhost:3000/api/v1/actors/3
+
+### Delete Actor (Error - Not found)
+DELETE http://localhost:3000/api/v1/actors/999
+
+### Get Movies by Actor (Success)
+GET http://localhost:3000/api/v1/actors/1/movies?page=1&size=5
+
+### Get Movies by Actor (Error - Invalid page)
+GET http://localhost:3000/api/v1/actors/1/movies?page=-1&size=5
+
+### ========== USERS ENDPOINTS ==========
+
+### List Users (Success)
+GET http://localhost:3000/api/v1/users?page=1&size=5
+
+### List Users (Error - Invalid page)
+GET http://localhost:3000/api/v1/users?page=0&size=5
+
+### Create User (Success)
+POST http://localhost:3000/api/v1/users
+Content-Type: application/json
+
+{
+  "username": "newuser",
+  "email": "newuser@smdb.com",
+  "role": "User"
+}
+
+### Create User (Error - Invalid email)
+POST http://localhost:3000/api/v1/users
+Content-Type: application/json
+
+{
+  "username": "testuser",
+  "email": "invalidemail",
+  "role": "User"
+}
+
+### Read User (Success)
+GET http://localhost:3000/api/v1/users/1
+
+### Read User (Error - Not found)
+GET http://localhost:3000/api/v1/users/999
+
+### Update User (Success)
+PUT http://localhost:3000/api/v1/users/1
+Content-Type: application/json
+
+{
+  "username": "admin-updated",
+  "email": "admin@smdb.com",
+  "role": "Admin"
+}
+
+### Update User (Error - Missing username)
+PUT http://localhost:3000/api/v1/users/1
+Content-Type: application/json
+
+{
+  "username": "",
+  "email": "test@test.com",
+  "role": "User"
+}
+
+### Delete User (Success)
+DELETE http://localhost:3000/api/v1/users/2
+
+### Delete User (Error - Not found)
+DELETE http://localhost:3000/api/v1/users/999
+
+### ========== ACTORS-MOVIES ENDPOINTS ==========
+
+### List Actors-Movies (Success)
+GET http://localhost:3000/api/v1/actors-movies?page=1&size=5
+
+### List Actors-Movies (Error - Invalid size)
+GET http://localhost:3000/api/v1/actors-movies?page=1&size=-1
+
+### Create Actor-Movie (Success)
+POST http://localhost:3000/api/v1/actors-movies
+Content-Type: application/json
+
+{
+  "actorId": 1,
+  "movieId": 2,
+  "role": "Supporting Actor"
+}
+
+### Create Actor-Movie (Error - Invalid actorId)
+POST http://localhost:3000/api/v1/actors-movies
+Content-Type: application/json
+
+{
+  "actorId": 0,
+  "movieId": 1,
+  "role": "Test Role"
+}
+
+### Read Actor-Movie (Success)
+GET http://localhost:3000/api/v1/actors-movies/1
+
+### Read Actor-Movie (Error - Not found)
+GET http://localhost:3000/api/v1/actors-movies/999
+
+### Update Actor-Movie (Success)
+PUT http://localhost:3000/api/v1/actors-movies/1
+Content-Type: application/json
+
+{
+  "actorId": 1,
+  "movieId": 1,
+  "role": "Updated Role"
+}
+
+### Update Actor-Movie (Error - Missing role)
+PUT http://localhost:3000/api/v1/actors-movies/1
+Content-Type: application/json
+
+{
+  "actorId": 1,
+  "movieId": 1,
+  "role": ""
+}
+
+### Delete Actor-Movie (Success)
+DELETE http://localhost:3000/api/v1/actors-movies/3
+
+### Delete Actor-Movie (Error - Not found)
+DELETE http://localhost:3000/api/v1/actors-movies/999
