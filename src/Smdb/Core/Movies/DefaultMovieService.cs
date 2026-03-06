@@ -1,4 +1,4 @@
-cnamespace Smdb.Core.Movies;
+namespace Smdb.Core.Movies;
 
 using Shared.Http;
 using System.Net;
