@@ -98,8 +98,7 @@ public class MoviesApiController : ControllerBase
     {
         if (!_movies.Any(m => m.Id == movieId))
             return NotFound(new { message = $"Movie {movieId} not found." });
-        var links = ActorsMoviesApiController.Links.Where(l => l.MovieId == movieId).ToList();
-        return Ok(links);
+        return Ok(ActorMovieStore.Links.Where(l => l.MovieId == movieId).ToList());
     }
 
     // POST /api/v1/movies/{movieId}/actors/{actorId}
@@ -108,9 +107,9 @@ public class MoviesApiController : ControllerBase
     {
         if (!_movies.Any(m => m.Id == movieId))
             return NotFound(new { message = $"Movie {movieId} not found." });
-        if (ActorsMoviesApiController.Links.Any(l => l.MovieId == movieId && l.ActorId == actorId))
+        if (ActorMovieStore.Links.Any(l => l.MovieId == movieId && l.ActorId == actorId))
             return BadRequest(new { message = "Actor is already linked to this movie." });
-        ActorsMoviesApiController.Links.Add(new MovieActorModel { MovieId = movieId, ActorId = actorId });
+        ActorMovieStore.Links.Add(new MovieActorModel { MovieId = movieId, ActorId = actorId });
         return Created("", new { movieId, actorId });
     }
 
@@ -118,9 +117,9 @@ public class MoviesApiController : ControllerBase
     [HttpDelete("{movieId}/actors/{actorId}")]
     public IActionResult RemoveActor(int movieId, int actorId)
     {
-        var link = ActorsMoviesApiController.Links.FirstOrDefault(l => l.MovieId == movieId && l.ActorId == actorId);
+        var link = ActorMovieStore.Links.FirstOrDefault(l => l.MovieId == movieId && l.ActorId == actorId);
         if (link == null) return NotFound(new { message = "Link not found." });
-        ActorsMoviesApiController.Links.Remove(link);
+        ActorMovieStore.Links.Remove(link);
         return NoContent();
     }
 }
