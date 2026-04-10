@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Movie Actors • Simple Movie Database</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="/styles/main.css" />
+  <script type="module" src="/scripts/movies/actors.js" defer></script>
+</head>
+<body>
+  <header>
+    <h1>Movie Actors</h1>
+    <nav>
+      <ul>
+        <li><a href="/" class="btn">Home</a></li>
+        <li><a href="/movies/index.html" class="btn">All Movies</a></li>
+        <li><a id="view-link" class="btn">View Movie</a></li>
+      </ul>
+    </nav>
+  </header>
+  <main class="container">
+    <div id="status" class="status">Loading...</div>
+    <h2 id="movie-title" style="margin-bottom:1rem;"></h2>
+
+    <form id="add-actor-form" class="grid" style="margin-bottom:1.5rem;">
+      <div class="field">
+        <label for="actor-select">Add Actor to Movie</label>
+        <select id="actor-select" name="actorId"></select>
+      </div>
+      <div class="form-actions">
+        <button class="btn primary" type="submit">Add Actor</button>
+      </div>
+    </form>
+
+    <div id="actor-list" class="grid cards"></div>
+  </main>
+
+  <template id="actor-card">
+    <div class="card">
+      <h3><span class="fullname"></span></h3>
+      <div class="row-actions">
+        <button class="btn danger btn-unlink" type="button">Remove</button>
+      </div>
+    </div>
+  </template>
+</body>
+</html>

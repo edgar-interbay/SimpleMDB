@@ -26,6 +26,7 @@ import { $, apiFetch, renderStatus, clearChildren, getQueryParam } from '/script
         root.querySelector('.year').textContent      = String(m.year ?? '—');
         root.querySelector('.btn-view').href         = `/movies/view.html?id=${encodeURIComponent(m.id)}`;
         root.querySelector('.btn-edit').href         = `/movies/edit.html?id=${encodeURIComponent(m.id)}`;
+        root.querySelector('.btn-actors').href       = `/movies/actors.html?id=${encodeURIComponent(m.id)}`;
         root.querySelector('.btn-delete').dataset.id = m.id;
         listEl.appendChild(frag);
       }
