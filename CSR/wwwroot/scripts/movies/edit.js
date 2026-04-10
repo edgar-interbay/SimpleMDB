@@ -1,22 +1,20 @@
 import { $, apiFetch, renderStatus, getQueryParam, captureMovieForm } from '/scripts/common.js';
 
 (async function initMovieEdit() {
-  const id = getQueryParam('id');
-  const form = $('#movie-form');
+  const id       = getQueryParam('id');
+  const form     = $('#movie-form');
   const statusEl = $('#status');
 
-  // Disable form if no id provided
   if (!id) {
     renderStatus(statusEl, 'err', 'Missing ?id in URL.');
     form.querySelectorAll('input,textarea,button,select').forEach(el => el.disabled = true);
     return;
   }
 
-  // Load existing movie data into form
   try {
     const m = await apiFetch(`/movies/${encodeURIComponent(id)}`);
-    form.title.value = m.title ?? '';
-    form.year.value = m.year ?? '';
+    form.title.value       = m.title ?? '';
+    form.year.value        = m.year ?? '';
     form.description.value = m.description ?? '';
     renderStatus(statusEl, 'ok', 'Loaded movie. You can edit and save.');
   } catch (err) {

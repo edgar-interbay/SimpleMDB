@@ -1,7 +1,7 @@
 import { $, apiFetch, renderStatus, captureMovieForm } from '/scripts/common.js';
 
 (async function initMovieAdd() {
-  const form = $('#movie-form');
+  const form     = $('#movie-form');
   const statusEl = $('#status');
   renderStatus(statusEl, 'ok', 'New movie. You can edit and save.');
 

@@ -6,13 +6,13 @@ import { $, apiFetch, renderStatus, clearChildren, getQueryParam } from '/script
   localStorage.setItem('page', page);
   localStorage.setItem('size', size);
 
-  const listEl = $('#movie-list');
+  const listEl   = $('#movie-list');
   const statusEl = $('#status');
-  const tpl = $('#movie-card');
+  const tpl      = $('#movie-card');
 
   try {
     const payload = await apiFetch(`/movies?page=${page}&size=${size}`);
-    const items = Array.isArray(payload) ? payload : (payload.data || []);
+    const items   = Array.isArray(payload) ? payload : (payload.data || []);
     clearChildren(listEl);
 
     if (items.length === 0) {
@@ -22,16 +22,15 @@ import { $, apiFetch, renderStatus, clearChildren, getQueryParam } from '/script
       for (const m of items) {
         const frag = tpl.content.cloneNode(true);
         const root = frag.querySelector('.card');
-        root.querySelector('.title').textContent = m.title ?? '—';
-        root.querySelector('.year').textContent = String(m.year ?? '—');
-        root.querySelector('.btn-view').href = `/movies/view.html?id=${encodeURIComponent(m.id)}`;
-        root.querySelector('.btn-edit').href = `/movies/edit.html?id=${encodeURIComponent(m.id)}`;
+        root.querySelector('.title').textContent     = m.title ?? '—';
+        root.querySelector('.year').textContent      = String(m.year ?? '—');
+        root.querySelector('.btn-view').href         = `/movies/view.html?id=${encodeURIComponent(m.id)}`;
+        root.querySelector('.btn-edit').href         = `/movies/edit.html?id=${encodeURIComponent(m.id)}`;
         root.querySelector('.btn-delete').dataset.id = m.id;
         listEl.appendChild(frag);
       }
     }
 
-    // Delete via event delegation
     listEl.addEventListener('click', async (ev) => {
       const btn = ev.target.closest('button.btn-delete[data-id]');
       if (!btn) return;
@@ -46,14 +45,13 @@ import { $, apiFetch, renderStatus, clearChildren, getQueryParam } from '/script
       }
     });
 
-    // Page size selector
     const sizeSelect = document.getElementById('page-size');
-    const pageSizes = [3, 6, 9, 12, 15];
+    const pageSizes  = [3, 6, 9, 12, 15];
     for (const s of pageSizes) {
-      const opt = document.createElement('option');
-      opt.value = s;
+      const opt       = document.createElement('option');
+      opt.value       = s;
       opt.textContent = String(s);
-      opt.selected = (size == s);
+      opt.selected    = (size == s);
       sizeSelect.appendChild(opt);
     }
     sizeSelect.addEventListener('change', () => {
@@ -65,10 +63,9 @@ import { $, apiFetch, renderStatus, clearChildren, getQueryParam } from '/script
       window.location.href = `${window.location.pathname}?${params.toString()}`;
     });
 
-    // Pagination
     $('#page-num').textContent = `Page ${page}`;
     const firstPage = page <= 1;
-    const lastPage = page >= payload.meta.totalPages;
+    const lastPage  = page >= payload.meta.totalPages;
 
     const firstBtn = $('#first');
     const prevBtn  = $('#prev');
@@ -81,9 +78,9 @@ import { $, apiFetch, renderStatus, clearChildren, getQueryParam } from '/script
     lastBtn.href  = `?page=${payload.meta.totalPages}&size=${size}`;
 
     firstBtn.classList.toggle('disabled', firstPage);
-    prevBtn.classList.toggle('disabled', firstPage);
-    nextBtn.classList.toggle('disabled', lastPage);
-    lastBtn.classList.toggle('disabled', lastPage);
+    prevBtn.classList.toggle('disabled',  firstPage);
+    nextBtn.classList.toggle('disabled',  lastPage);
+    lastBtn.classList.toggle('disabled',  lastPage);
 
     firstBtn.setAttribute('onclick', `return ${!firstPage};`);
     prevBtn.setAttribute('onclick',  `return ${!firstPage};`);
