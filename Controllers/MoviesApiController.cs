@@ -91,4 +91,36 @@ public class MoviesApiController : ControllerBase
         _movies.Remove(movie);
         return NoContent();
     }
+
+    // GET /api/v1/movies/{movieId}/actors
+    [HttpGet("{movieId}/actors")]
+    public IActionResult GetActors(int movieId)
+    {
+        if (!_movies.Any(m => m.Id == movieId))
+            return NotFound(new { message = $"Movie {movieId} not found." });
+        var links = ActorsMoviesApiController.Links.Where(l => l.MovieId == movieId).ToList();
+        return Ok(links);
+    }
+
+    // POST /api/v1/movies/{movieId}/actors/{actorId}
+    [HttpPost("{movieId}/actors/{actorId}")]
+    public IActionResult AddActor(int movieId, int actorId)
+    {
+        if (!_movies.Any(m => m.Id == movieId))
+            return NotFound(new { message = $"Movie {movieId} not found." });
+        if (ActorsMoviesApiController.Links.Any(l => l.MovieId == movieId && l.ActorId == actorId))
+            return BadRequest(new { message = "Actor is already linked to this movie." });
+        ActorsMoviesApiController.Links.Add(new MovieActorModel { MovieId = movieId, ActorId = actorId });
+        return Created("", new { movieId, actorId });
+    }
+
+    // DELETE /api/v1/movies/{movieId}/actors/{actorId}
+    [HttpDelete("{movieId}/actors/{actorId}")]
+    public IActionResult RemoveActor(int movieId, int actorId)
+    {
+        var link = ActorsMoviesApiController.Links.FirstOrDefault(l => l.MovieId == movieId && l.ActorId == actorId);
+        if (link == null) return NotFound(new { message = "Link not found." });
+        ActorsMoviesApiController.Links.Remove(link);
+        return NoContent();
+    }
 }
