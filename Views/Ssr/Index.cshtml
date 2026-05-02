@@ -1,0 +1,22 @@
+@{ ViewData["Title"] = "Home"; Layout = "~/Views/Shared/_SsrLayout.cshtml"; }
+
+<div class="text-center mt-5">
+  <h1 class="display-4 fw-bold text-primary">Simple Movie Database</h1>
+  <p class="lead text-muted">Server-Side Rendered</p>
+  @if (ViewBag.Username != null)
+  {
+    <p>Welcome, <strong>@ViewBag.Username</strong>!</p>
+    <div class="d-flex justify-content-center gap-3 mt-4">
+      <a asp-action="Movies" class="btn btn-success btn-lg">Movies</a>
+      <a asp-action="Actors" class="btn btn-primary btn-lg">Actors</a>
+      @if (ViewBag.IsAdmin == true)
+      {
+        <a asp-action="Users" class="btn btn-warning btn-lg">Users</a>
+      }
+    </div>
+  }
+  else
+  {
+    <p class="mt-3">Please <a asp-controller="Auth" asp-action="Login">login</a> or <a asp-controller="Auth" asp-action="Register">register</a> to continue.</p>
+  }
+</div>

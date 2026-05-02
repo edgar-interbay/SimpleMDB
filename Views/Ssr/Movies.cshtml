@@ -1,0 +1,36 @@
+@{ ViewData["Title"] = "Movies"; Layout = "~/Views/Shared/_SsrLayout.cshtml"; }
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+  <h2>Movies</h2>
+  @if (ViewBag.IsAdmin == true)
+  {
+    <a asp-action="CreateMovie" class="btn btn-success">+ Add Movie</a>
+  }
+</div>
+
+<div class="row row-cols-1 row-cols-md-3 g-4">
+  @foreach (var m in (List<SimpleMovieDB.Models.MovieModel>)ViewBag.Movies)
+  {
+    <div class="col">
+      <div class="card h-100 shadow-sm">
+        <div class="card-body">
+          <h5 class="card-title">@m.Title</h5>
+          <span class="badge bg-secondary mb-2">@m.Year</span>
+          <p class="card-text text-muted small">@m.Description</p>
+        </div>
+        <div class="card-footer d-flex gap-2">
+          <a asp-action="MovieDetails" asp-route-id="@m.Id" class="btn btn-sm btn-outline-primary">View</a>
+          @if (ViewBag.IsAdmin == true)
+          {
+            <a asp-action="EditMovie" asp-route-id="@m.Id" class="btn btn-sm btn-outline-warning">Edit</a>
+            <a asp-action="MovieActors" asp-route-id="@m.Id" class="btn btn-sm btn-outline-info">Actors</a>
+            <form asp-action="DeleteMovie" asp-route-id="@m.Id" method="post" class="d-inline"
+                  onsubmit="return confirm('Delete this movie?')">
+              <button type="submit" class="btn btn-sm btn-outline-danger">Delete</button>
+            </form>
+          }
+        </div>
+      </div>
+    </div>
+  }
+</div>

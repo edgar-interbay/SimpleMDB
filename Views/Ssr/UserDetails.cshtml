@@ -1,0 +1,17 @@
+@model SimpleMovieDB.Models.UserModel
+@{ ViewData["Title"] = "User Details"; Layout = "~/Views/Shared/_SsrLayout.cshtml"; }
+
+<div class="row justify-content-center">
+  <div class="col-md-6">
+    <h2 class="mb-4">User Details</h2>
+    <table class="table table-bordered">
+      <tr><th>ID</th><td>@Model.Id</td></tr>
+      <tr><th>Username</th><td>@Model.Username</td></tr>
+      <tr><th>Role</th><td>@Model.Role</td></tr>
+    </table>
+    <div class="d-flex gap-2 mt-3">
+      <a asp-action="Users" class="btn btn-secondary">Back</a>
+      <a asp-action="EditUser" asp-route-id="@Model.Id" class="btn btn-warning">Edit</a>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,22 @@
+@model SimpleMovieDB.Models.MovieModel
+@{ ViewData["Title"] = "Movie Details"; Layout = "~/Views/Shared/_SsrLayout.cshtml"; }
+
+<div class="row justify-content-center">
+  <div class="col-md-7">
+    <h2 class="mb-4">@Model.Title</h2>
+    <table class="table table-bordered">
+      <tr><th>ID</th><td>@Model.Id</td></tr>
+      <tr><th>Title</th><td>@Model.Title</td></tr>
+      <tr><th>Year</th><td>@Model.Year</td></tr>
+      <tr><th>Description</th><td>@Model.Description</td></tr>
+    </table>
+    <div class="d-flex gap-2 mt-3">
+      <a asp-action="Movies" class="btn btn-secondary">Back</a>
+      @if (ViewBag.IsAdmin == true)
+      {
+        <a asp-action="EditMovie" asp-route-id="@Model.Id" class="btn btn-warning">Edit</a>
+        <a asp-action="MovieActors" asp-route-id="@Model.Id" class="btn btn-info">Manage Actors</a>
+      }
+    </div>
+  </div>
+</div>

@@ -1,0 +1,30 @@
+@model SimpleMovieDB.Models.MovieModel
+@{ ViewData["Title"] = "Add Movie"; Layout = "~/Views/Shared/_SsrLayout.cshtml"; }
+
+<div class="row justify-content-center">
+  <div class="col-md-6">
+    <h2 class="mb-4">Add Movie</h2>
+    @if (ViewBag.Error != null)
+    {
+      <div class="alert alert-danger">@ViewBag.Error</div>
+    }
+    <form method="post">
+      <div class="mb-3">
+        <label class="form-label">Title</label>
+        <input name="Title" class="form-control" value="@Model?.Title" required />
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Year</label>
+        <input name="Year" type="number" min="1888" max="9999" class="form-control" value="@Model?.Year" required />
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Description</label>
+        <textarea name="Description" class="form-control" rows="3">@Model?.Description</textarea>
+      </div>
+      <div class="d-flex gap-2">
+        <button type="submit" class="btn btn-success">Create</button>
+        <a asp-action="Movies" class="btn btn-secondary">Cancel</a>
+      </div>
+    </form>
+  </div>
+</div>

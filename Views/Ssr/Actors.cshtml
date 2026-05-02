@@ -1,0 +1,34 @@
+@{ ViewData["Title"] = "Actors"; Layout = "~/Views/Shared/_SsrLayout.cshtml"; }
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+  <h2>Actors</h2>
+  @if (ViewBag.IsAdmin == true)
+  {
+    <a asp-action="CreateActor" class="btn btn-success">+ Add Actor</a>
+  }
+</div>
+
+<div class="row row-cols-1 row-cols-md-3 g-4">
+  @foreach (var a in (List<SimpleMovieDB.Models.ActorModel>)ViewBag.Actors)
+  {
+    <div class="col">
+      <div class="card h-100 shadow-sm">
+        <div class="card-body">
+          <h5 class="card-title">@a.FirstName @a.LastName</h5>
+          <span class="badge bg-warning text-dark">★ @a.Rating</span>
+        </div>
+        <div class="card-footer d-flex gap-2">
+          <a asp-action="ActorDetails" asp-route-id="@a.Id" class="btn btn-sm btn-outline-primary">View</a>
+          @if (ViewBag.IsAdmin == true)
+          {
+            <a asp-action="EditActor" asp-route-id="@a.Id" class="btn btn-sm btn-outline-warning">Edit</a>
+            <form asp-action="DeleteActor" asp-route-id="@a.Id" method="post" class="d-inline"
+                  onsubmit="return confirm('Delete this actor?')">
+              <button type="submit" class="btn btn-sm btn-outline-danger">Delete</button>
+            </form>
+          }
+        </div>
+      </div>
+    </div>
+  }
+</div>

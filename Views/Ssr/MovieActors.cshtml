@@ -1,0 +1,51 @@
+@{ ViewData["Title"] = "Movie Actors"; Layout = "~/Views/Shared/_SsrLayout.cshtml"; }
+
+@{
+    var movie = (SimpleMovieDB.Models.MovieModel)ViewBag.Movie;
+    var linked = (List<SimpleMovieDB.Models.ActorModel?>)ViewBag.LinkedActors;
+    var all    = (List<SimpleMovieDB.Models.ActorModel>)ViewBag.AllActors;
+}
+
+<h2 class="mb-1">Actors in: @movie.Title</h2>
+<p class="text-muted mb-4">@movie.Year</p>
+
+@if (ViewBag.IsAdmin == true)
+{
+  <form asp-action="AddActorToMovie" method="post" class="d-flex gap-2 mb-4">
+    <input type="hidden" name="movieId" value="@movie.Id" />
+    <select name="actorId" class="form-select w-auto">
+      @foreach (var a in all)
+      {
+        <option value="@a.Id">@a.FirstName @a.LastName</option>
+      }
+    </select>
+    <button type="submit" class="btn btn-success">Add Actor</button>
+  </form>
+}
+
+@if (linked.Count == 0)
+{
+  <p class="text-muted">No actors linked to this movie yet.</p>
+}
+else
+{
+  <ul class="list-group">
+    @foreach (var a in linked)
+    {
+      <li class="list-group-item d-flex justify-content-between align-items-center">
+        @a!.FirstName @a.LastName
+        @if (ViewBag.IsAdmin == true)
+        {
+          <form asp-action="RemoveActorFromMovie" method="post" class="d-inline"
+                onsubmit="return confirm('Remove this actor?')">
+            <input type="hidden" name="movieId" value="@movie.Id" />
+            <input type="hidden" name="actorId" value="@a.Id" />
+            <button type="submit" class="btn btn-sm btn-outline-danger">Remove</button>
+          </form>
+        }
+      </li>
+    }
+  </ul>
+}
+
+<a asp-action="Movies" class="btn btn-secondary mt-4">Back to Movies</a>
