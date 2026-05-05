@@ -1,0 +1,29 @@
+@{ ViewData["Title"] = "Lista de Usuarios"; }
+
+<div class="container mt-4">
+    <h2 class="text-warning text-dark p-2 rounded"><i class="fas fa-user-shield"></i> Administración de Usuarios</h2>
+    <hr />
+    <table class="table table-sm table-bordered shadow-sm">
+        <thead class="table-dark">
+            <tr>
+                <th>ID</th>
+                <th>Usuario</th>
+                <th>Rol</th>
+            </tr>
+        </thead>
+        <tbody id="tabla-usuarios"></tbody>
+    </table>
+    <a href="/" class="btn btn-secondary">Volver al Inicio</a>
+</div>
+
+<script>
+    fetch('/api/v1/users')
+        .then(res => res.json())
+        .then(data => {
+            let contenido = '';
+            data.forEach(u => {
+                contenido += `<tr><td>${u.id}</td><td>${u.username}</td><td><span class="badge bg-info">${u.role}</span></td></tr>`;
+            });
+            document.getElementById('tabla-usuarios').innerHTML = contenido;
+        });
+</script>

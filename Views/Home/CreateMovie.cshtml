@@ -1,0 +1,29 @@
+@{ ViewData["Title"] = "Nueva Película"; }
+
+<div class="container mt-4">
+    <div class="card shadow">
+        <div class="card-header bg-success text-white">
+            <h3><i class="fas fa-plus-circle"></i> Agregar Película</h3>
+        </div>
+        <div class="card-body">
+            <form action="/api/v1/movies" method="post" enctype="application/x-www-form-urlencoded">
+                <div class="mb-3">
+                    <label class="form-label">Título de la Obra</label>
+                    <input name="Title" class="form-control" placeholder="Ej: Inception" required />
+                </div>
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label">Año de Estreno</label>
+                        <input name="Year" type="number" class="form-control" value="2024" required />
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label">Género</label>
+                        <input name="Genre" class="form-control" placeholder="Ej: Sci-Fi" required />
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-success w-100">Guardar en Base de Datos</button>
+            </form>
+        </div>
+    </div>
+    <a href="/" class="btn btn-link mt-3 text-secondary text-decoration-none">← Cancelar y volver</a>
+</div>

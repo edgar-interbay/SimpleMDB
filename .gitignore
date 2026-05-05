@@ -81,3 +81,16 @@ _ReSharper*/
 
 # Windows
 Thumbs.db
+
+# Exclude duplicate wwwroot (CSR/wwwroot is the canonical one)
+wwwroot/lib/
+wwwroot/css/
+wwwroot/js/
+wwwroot/favicon.ico
+
+# Exclude ASP.NET MVC controllers not part of the assignment
+Controllers/ActorsApiController.cs
+Controllers/ActorsMoviesApiController.cs
+Controllers/HomeController.cs
+Controllers/MoviesApiController.cs
+Controllers/UsersApiController.cs

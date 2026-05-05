@@ -1,0 +1,29 @@
+﻿@{ ViewData["Title"] = "Dashboard MovieDB"; }
+
+<div class="container text-center mt-5">
+    <h1 class="display-4 fw-bold text-primary">Simple Movie DB</h1>
+    <p class="lead text-muted">Panel de Gestión de API v1.0</p>
+    
+    <div class="row mt-5">
+        <div class="col-md-3">
+            <a href="/Home/Actors" class="btn btn-primary btn-lg w-100 py-4 shadow">
+                <i class="fas fa-user-friends d-block mb-2"></i> Actores
+            </a>
+        </div>
+        <div class="col-md-3">
+            <a href="/Home/Movies" class="btn btn-success btn-lg w-100 py-4 shadow">
+                <i class="fas fa-film d-block mb-2"></i> Películas
+            </a>
+        </div>
+        <div class="col-md-3">
+            <a href="/Home/Users" class="btn btn-warning btn-lg w-100 py-4 shadow text-dark">
+                <i class="fas fa-users-cog d-block mb-2"></i> Usuarios
+            </a>
+        </div>
+        <div class="col-md-3">
+            <a href="/Home/CreateMovie" class="btn btn-dark btn-lg w-100 py-4 shadow">
+                <i class="fas fa-plus d-block mb-2"></i> Nueva Peli
+            </a>
+        </div>
+    </div>
+</div>

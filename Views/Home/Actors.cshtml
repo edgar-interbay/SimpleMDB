@@ -1,0 +1,27 @@
+@{ ViewData["Title"] = "Lista de Actores"; }
+
+<h2>Actores en la Base de Datos</h2>
+<table class="table table-striped mt-4">
+    <thead class="thead-dark">
+        <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Apellido</th>
+            <th>Rating</th>
+        </tr>
+    </thead>
+    <tbody id="tabla-actores">
+        </tbody>
+</table>
+
+<script>
+    fetch('/api/v1/actors')
+        .then(response => response.json())
+        .then(data => {
+            let html = '';
+            data.forEach(a => {
+                html += `<tr><td>${a.id}</td><td>${a.firstName}</td><td>${a.lastName}</td><td>${a.rating}</td></tr>`;
+            });
+            document.getElementById('tabla-actores').innerHTML = html;
+        });
+</script>
